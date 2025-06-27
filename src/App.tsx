@@ -10,6 +10,9 @@ import Drawer from './components/Drawer';
 
 import Error from './views/Error';
 import Index from './views/Index';
+import Fashion from './views/Fashion';
+import Accessory from './views/Accessory';
+import Digital from './views/Digital';
 
 import './assets/css/tailwind.css';
 import './assets/css/style.css';
@@ -31,6 +34,9 @@ function App() {
             <Routes>
               <Route path='*' element={<Error />} />
               <Route path='/' element={<Index />} />
+              <Route path='/fashion' element={<Fashion />} />
+              <Route path='/accessory' element={<Accessory />} />
+              <Route path='/digital' element={<Digital />} />
             </Routes>
           </section>
           <Footer />
