@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { toCurrencyFormat } from '../helpers/helpers';
-import type { Product } from '../recoil/products';
+import type { Product } from '../store/searchSlice';
 import ProductsLoad from './ProductsLoad';
 
 const ProductsList = ({ products, limit }: { products: Product[]; limit: number }): JSX.Element => {
