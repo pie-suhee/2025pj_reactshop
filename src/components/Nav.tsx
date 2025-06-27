@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import Search from './Search';
 
-const Nav = () => {
+const Nav = (): JSX.Element => {
   const menus = [
     { name: 'fashion', title: '패션' },
     { name: 'accessory', title: '액세서리' },

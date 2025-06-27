@@ -1,8 +1,10 @@
-// src/store/index.ts
 import { configureStore } from '@reduxjs/toolkit';
+import searchReducer from './searchSlice';
 
 export const store = configureStore({
-    reducer: () => ({}), // 빈 리듀서 (추후 교체 예정)
+    reducer: {
+        search: searchReducer,
+    },
 });
 
 // 타입 추론용

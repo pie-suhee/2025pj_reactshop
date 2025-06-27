@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-const Slider = () => {
+const Slider = (): JSX.Element => {
   const items = [
     {
       name: 'fashion',
