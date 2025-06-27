@@ -57,7 +57,7 @@ const Search = (): JSX.Element => {
         onChange={(e) => dispatch(setQuery(e.target.value))}
       />
       {filtered.length > 0 && (
-        <ul className='!fixed left-0 sm:!absolute sm:top-14 menu dropdown-content w-full sm:w-64 max-h-96 shadow text-base-content overflow-y-auto bg-white dark:bg-gray-600'>
+        <ul className='!fixed left-0 sm:!absolute sm:top-14 menu dropdown-content !block w-full sm:w-64 max-h-96 shadow text-base-content overflow-x-hidden bg-white dark:bg-gray-600'>
           {filtered.map((item) => (
             <li key={item.id} className='js-searchedItem'>
               <span>{item.title}</span>
