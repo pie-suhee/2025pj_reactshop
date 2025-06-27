@@ -1,26 +1,28 @@
 import { Link } from 'react-router-dom';
-import { CartItems, CartState, cartState, removeFromCart } from '../recoil/cart';
+import { useAppDispatch } from '../store/hooks';
+import { addToCart, removeFromCart } from '../store/cartSlice';
 import { toCurrencyFormat } from '../helpers/helpers';
-import { useRecoilState } from 'recoil';
+import type { Product } from '../store/searchSlice';
+
+type CartItemData = Product & { count: number };
 
 type Item = {
-  data?: CartItems;
+  data?: CartItemData;
 } & typeof defaultProps;
 
 const defaultProps = {
-  data: [],
+  data: {} as CartItemData,
 };
 
 const CartList = ({ data }: Item): JSX.Element => {
-  const [cart, setCart] = useRecoilState<CartState>(cartState);
+  const dispatch = useAppDispatch();
 
   const removeFromCartHandler = (id: number) => {
-    setCart(removeFromCart(cart, id));
+    dispatch(removeFromCart(id));
   };
 
   const addToCartHandler = (id: number) => {
-    // @ts-ignore
-    setCart({...cart, [id]: { id: id, count : (cart[id].count || 0) + 1 }})
+    dispatch(addToCart(id));
   };
 
   return (
@@ -39,11 +41,11 @@ const CartList = ({ data }: Item): JSX.Element => {
         <p className='mt-2 mb-4 text-3xl'> {toCurrencyFormat(data.price)}</p>
         <div className='card-actions'>
           <div className='btn-group'>
-            <button className='btn btn-primary' onClick={() => removeFromCartHandler(parseInt(data.id))}>
+            <button className='btn btn-primary' onClick={() => removeFromCartHandler(parseInt(String(data.id)))}>
               -
             </button>
             <button className='btn btn-ghost no-animation'>{data.count}</button>
-            <button className='btn btn-primary' onClick={() => addToCartHandler(parseInt(data.id))}>
+            <button className='btn btn-primary' onClick={() => addToCartHandler(parseInt(String(data.id)))}>
               +
             </button>
           </div>

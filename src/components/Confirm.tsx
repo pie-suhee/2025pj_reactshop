@@ -1,9 +1,11 @@
-import { useRecoilState } from 'recoil';
-import { CartState, cartState } from '../recoil/cart';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { clearCart } from '../store/cartSlice';
 
 const Confirm = (): JSX.Element => {
-  const [cart, setCart] = useRecoilState<CartState>(cartState);
-  const buyItems = () => setCart({} as CartState);
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart.items);
+  const buyItems = () => dispatch(clearCart());
+  
   return (
     <>
       <input type='checkbox' id='confirm-modal' className='modal-toggle' />

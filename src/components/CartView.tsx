@@ -1,18 +1,35 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { fetchProducts, Product } from '../store/searchSlice';
 import { toCurrencyFormat } from '../helpers/helpers';
-import { CartItems, cartList, cartTotal } from '../recoil/cart';
 import BreadCrumb from './Breadcrumb';
 import CartList from './CartList';
 import Confirm from './Confirm';
 import ProductsViewLoad from './ProductsViewLoad';
 
 const CartView = (): JSX.Element => {
-  const cartLoadable = useRecoilValueLoadable<CartItems[]>(cartList);
-  const cartItems: CartItems[] = 'hasValue' === cartLoadable.state ? cartLoadable.contents : [];
-  const totalPrice = useRecoilValueLoadable(cartTotal).contents;
+  const dispatch = useAppDispatch();
+  const products = useAppSelector((state) => state.search.products);
+  const cartItemsState = useAppSelector((state) => state.cart.items);
 
-  if ('loading' === cartLoadable.state) {
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, products.length]);
+
+  const cartItems = cartItemsState.map((item) => {
+    const product = products.find((p) => p.id === item.id) as Product | undefined;
+    return product ? { ...product, count: item.count } : ({ id: item.id, count: item.count } as any);
+  });
+
+  const totalPrice = cartItems.reduce(
+    (total, item: any) => total + (item.price || 0) * item.count,
+    0
+  );
+
+  if (products.length === 0) {
     return <ProductsViewLoad />;
   }
 
