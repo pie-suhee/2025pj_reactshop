@@ -1,26 +1,36 @@
 import ProductsViewLoad from './ProductsViewLoad';
 import BreadCrumb from '../components/Breadcrumb';
 import Rating from './Rating';
-import { Product, productsList } from '../recoil/products';
+import { Product, fetchProducts } from '../store/searchSlice';
 import { Link, useParams } from 'react-router-dom';
 import { toCurrencyFormat } from '../helpers/helpers';
-import { useRecoilState, useRecoilValueLoadable } from 'recoil';
-import { addToCart, CartState, cartState } from '../recoil/cart';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { addToCart } from '../store/cartSlice';
 
 const ProductsView = (): JSX.Element => {
-  const ProductsLoadable = useRecoilValueLoadable<Product[]>(productsList);
-  const products: Product[] = 'hasValue' === ProductsLoadable.state ? ProductsLoadable.contents : [];
+  const dispatch = useAppDispatch();
+  const products = useAppSelector((state) => state.search.products);
   const productParam = useParams();
-  const product: Product = products.filter((item) => productParam.id === item.id.toString())[0];
-  const [cart, setCart] = useRecoilState<CartState>(cartState);
+
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, products.length]);
+
+  const product: Product | undefined = products.find(
+    (item) => productParam.id === item.id.toString()
+  );
 
   const addToCartHandler = (productId: number) => {
-    setCart(addToCart(cart, productId));
+    dispatch(addToCart(productId));
   };
 
-  if ('loading' === ProductsLoadable.state) {
+  if (!product) {
     return <ProductsViewLoad />;
   }
+
   return (
     <div>
       <BreadCrumb category={product.category} crumb={product.title} />

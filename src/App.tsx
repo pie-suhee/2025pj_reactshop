@@ -13,6 +13,7 @@ import Index from './views/Index';
 import Fashion from './views/Fashion';
 import Accessory from './views/Accessory';
 import Digital from './views/Digital';
+import Products from './views/Products';
 
 import './assets/css/tailwind.css';
 import './assets/css/style.css';
@@ -37,6 +38,7 @@ function App() {
               <Route path='/fashion' element={<Fashion />} />
               <Route path='/accessory' element={<Accessory />} />
               <Route path='/digital' element={<Digital />} />
+              <Route path='/product/:id' element={<Products />} />
             </Routes>
           </section>
           <Footer />
