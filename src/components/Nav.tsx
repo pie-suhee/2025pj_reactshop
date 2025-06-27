@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useRecoilValue } from 'recoil';
-import { cartCount } from '../recoil/cart';
+import { useAppSelector } from '../store/hooks';
 
 import Search from './Search';
 
@@ -13,7 +12,9 @@ const Nav = (): JSX.Element => {
     { name: 'digital', title: '디지털' },
   ];
 
-  const count = useRecoilValue(cartCount);
+  const count = useAppSelector((state) =>
+    state.cart.items.reduce((total, item) => total + item.count, 0)
+  );
   const $html = document.querySelector('html');
   const themeLight = 'light';
   const themeDark = 'dark';

@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { useRef } from 'react';
 
 import { ScrollToTop } from './helpers/helpers';
+import { useCartLoad } from './composables/useCartLoad';
 
 import Footer from './components/Footer';
 import Nav from './components/Nav';
@@ -14,6 +15,7 @@ import Fashion from './views/Fashion';
 import Accessory from './views/Accessory';
 import Digital from './views/Digital';
 import Products from './views/Products';
+import Cart from './views/Cart';
 
 import './assets/css/tailwind.css';
 import './assets/css/style.css';
@@ -23,6 +25,8 @@ function App() {
   const closeOverlay = () => {
     $hamburger?.current?.click();
   };
+
+  useCartLoad();
 
   return (
     <HashRouter>
@@ -39,6 +43,7 @@ function App() {
               <Route path='/accessory' element={<Accessory />} />
               <Route path='/digital' element={<Digital />} />
               <Route path='/product/:id' element={<Products />} />
+              <Route path='/cart' element={<Cart />} />
             </Routes>
           </section>
           <Footer />
