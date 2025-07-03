@@ -60,7 +60,14 @@ const Search = (): JSX.Element => {
       {filtered.length > 0 && (
         <ul className='!fixed left-0 sm:!absolute sm:top-14 menu dropdown-content !block w-full sm:w-64 max-h-96 shadow text-base-content overflow-x-hidden bg-white dark:bg-gray-600'>
           {filtered.map((item) => (
-            <Link to={`/product/${item.id}`}>
+            <Link 
+              to={`/product/${item.id}`} 
+              onClick={(e) => {
+                (e.currentTarget as HTMLAnchorElement).blur();
+                inputRef.current?.blur();
+                setOpen(false);
+              }}
+            >
               <li key={item.id} className='js-searchedItem'>
                 <span>{item.title}</span>
               </li>
