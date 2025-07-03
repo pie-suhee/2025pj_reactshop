@@ -7,7 +7,7 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-.menu {
+.dropdown .menu {
   top: 112px;
 }
 
