@@ -62,7 +62,8 @@ const Search = (): JSX.Element => {
           {filtered.map((item) => (
             <Link 
               to={`/product/${item.id}`} 
-              onClick={() => {
+              onClick={(e) => {
+                (e.currentTarget as HTMLAnchorElement).blur();
                 inputRef.current?.blur();
                 setOpen(false);
               }}
