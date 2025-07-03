@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchProducts, setQuery } from '../store/searchSlice';
 
@@ -59,9 +60,11 @@ const Search = (): JSX.Element => {
       {filtered.length > 0 && (
         <ul className='!fixed left-0 sm:!absolute sm:top-14 menu dropdown-content !block w-full sm:w-64 max-h-96 shadow text-base-content overflow-x-hidden bg-white dark:bg-gray-600'>
           {filtered.map((item) => (
-            <li key={item.id} className='js-searchedItem'>
-              <span>{item.title}</span>
-            </li>
+            <Link to={`/product/${item.id}`}>
+              <li key={item.id} className='js-searchedItem'>
+                <span>{item.title}</span>
+              </li>
+            </Link>
           ))}
         </ul>
       )}
