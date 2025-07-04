@@ -7,10 +7,6 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-.dropdown .menu {
-  top: 112px;
-}
-
 .drawer-content {
   max-height: initial !important;
   min-height: -webkit-fill-available;
@@ -22,4 +18,10 @@ body {
 
 .js-searchedItem:active span {
   color: white !important;
+}
+
+@media all and (max-width: 480px) {
+  .dropdown .menu {
+    top: 112px;
+  }
 }
