@@ -36,7 +36,7 @@ const ProductsView = (): JSX.Element => {
       <BreadCrumb category={product.category} crumb={product.title} />
       <div className='lg:flex lg:items-center mt-6 md:mt-14 px-2 lg:px-0'>
         <figure className='flex-shrink-0 rounded-2xl overflow-hidden px-4 py-4 bg-white view_image'>
-          <img src={product.image} alt={product.title} className='object-contain w-full h-72' />
+          <img src={require(`../assets/img/${product.image}`)} alt={product.title} className='object-contain w-full h-72' />
         </figure>
         <div className='card-body px-1 lg:px-12'>
           <h2 className='card-title'>

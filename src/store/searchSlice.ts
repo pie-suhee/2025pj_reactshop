@@ -18,6 +18,17 @@ export const fetchProducts = createAsyncThunk<Product[]>('search/fetchProducts',
   return await res.json();
 });
 
+/* export const fetchProducts = createAsyncThunk<Product[]>(
+  'search/fetchProducts',
+  async () => {
+    const res = await fetch('http://fake-shop-api.ap-south-1.elasticbeanstalk.com/app/v1/products');
+    if (!res.ok) {
+      throw new Error('Failed to fetch products');
+    }
+    return await res.json();
+  }
+); */
+
 interface SearchState {
   products: Product[];
   query: string;

@@ -11,7 +11,7 @@ const ProductsList = ({ products, limit }: { products: Product[]; limit: number 
           return (
             <Link to={`/product/${product.id}`} key={product.id} className='card card-bordered border-gray-200 dark:border-gray-800 card-compact lg:card-normal overflow-hidden'>
               <figure className='flex h-80 bg-white overflow-hidden'>
-                <img src={product.image} alt='상품 이미지' className='transition-transform duration-300' />
+                <img src={require(`../assets/img/${product.image}`)} alt='상품 이미지' className='transition-transform duration-300' />
               </figure>
               <div className='card-body bg-gray-100 dark:bg-gray-700'>
                 <p className='card-title text-base'>{product.title}</p>
