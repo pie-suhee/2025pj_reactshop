@@ -29,7 +29,7 @@ const CartList = ({ data }: Item): JSX.Element => {
     <div className='lg:flex lg:items-center mt-4 px-2 lg:px-0'>
       <Link to={`/product/${data.id}`}>
         <figure className='w-56 min-w-full flex-shrink-0 rounded-2xl overflow-hidden px-4 py-4 bg-white'>
-          <img src={data.image} alt={data.title} className='object-contain w-full h-48' />
+          <img src={require(`../assets/img/${data.image}`)} alt={data.title} className='object-contain w-full h-48' />
         </figure>
       </Link>
       <div className='card-body px-1 lg:px-12'>
